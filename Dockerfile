@@ -10,7 +10,8 @@ RUN mkdir /var/www \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY nph-proxy.cgi /var/www
-COPY default.conf /etc/nginx/conf.d/
+COPY default.conf ssl_config /etc/nginx/conf.d/
+COPY fastcgi.conf server.crt server_nopwd.key /etc/nginx/
 WORKDIR /var/www
 VOLUME ["/var/log"]
 EXPOSE 80 443
@@ -19,5 +20,4 @@ RUN ./nph-proxy.cgi init \
         && cpan FCGI \
         && cpan FCGI::ProcManager
 
-#CMD [ "./nph-proxy.cgi", "start-fcgi" ]
 CMD nginx && ./nph-proxy.cgi start-fcgi

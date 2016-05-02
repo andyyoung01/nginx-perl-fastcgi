@@ -1,0 +1,4 @@
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate  server.crt;
+    ssl_certificate_key  server_nopwd.key;
