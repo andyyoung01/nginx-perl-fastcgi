@@ -11,7 +11,7 @@ RUN mkdir /var/www \
 
 COPY nph-proxy.cgi /var/www
 COPY default.conf ssl_config /etc/nginx/conf.d/
-COPY fastcgi.conf server.crt server_nopwd.key /etc/nginx/
+COPY server.crt server_nopwd.key /etc/nginx/
 WORKDIR /var/www
 VOLUME ["/var/log"]
 EXPOSE 80 443
