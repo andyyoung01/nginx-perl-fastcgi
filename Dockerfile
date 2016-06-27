@@ -7,11 +7,13 @@ RUN mkdir /var/www \
 	&& apt-get update \
 	&& apt-get install --no-install-recommends --no-install-suggests -y \
                        ca-certificates nginx=${NGINX_VERSION} gettext-base \
+			supervisor \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY nph-proxy.cgi /var/www
 COPY default.conf ssl_config /etc/nginx/conf.d/
 COPY server.crt server_nopwd.key /etc/nginx/
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 WORKDIR /var/www
 VOLUME ["/var/log"]
 EXPOSE 80 443
@@ -20,4 +22,4 @@ RUN ./nph-proxy.cgi init \
         && cpan FCGI \
         && cpan FCGI::ProcManager
 
-CMD nginx && ./nph-proxy.cgi start-fcgi
+CMD ["/usr/bin/supervisord"]
