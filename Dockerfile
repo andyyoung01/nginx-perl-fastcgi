@@ -1,6 +1,6 @@
 FROM gliderlabs/alpine:3.4
 RUN echo "@perl-5.20 http://dl-3.alpinelinux.org/alpine/v3.2/main">>/etc/apk/repositories \
-	&& apk add -U perl@edgea nginx
+	&& apk add -U perl@perl-5.20 nginx
 
 COPY nph-proxy.cgi /var/www
 COPY default.conf ssl_config /etc/nginx/conf.d/
