@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 #
 #
 #   CGIProxy 2.1.16
@@ -394,7 +394,7 @@ $PROXY_DIR= '/var/www/cgiproxy' ;
 #   the Web server's user can read and write.
 # This probably won't work on Windows, though note that you don't need root
 #   access to use port 443 on Windows.
-$RUN_AS_USER= 'www-data' ;
+$RUN_AS_USER= 'nginx' ;
 
 
 # IMPORTANT:  CHANGE THIS IF USING FASTCGI OR THE EMBEDDED SERVER!
