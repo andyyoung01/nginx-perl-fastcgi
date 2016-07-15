@@ -1,14 +1,6 @@
-FROM perl:5.20
-ENV NGINX_VERSION 1.8.1-1~jessie
-RUN mkdir /var/www \
-	&& chown -R www-data:www-data /var/www \
-	&& apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
-	&& echo "deb http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list \
-	&& apt-get update \
-	&& apt-get install --no-install-recommends --no-install-suggests -y \
-                       ca-certificates nginx=${NGINX_VERSION} gettext-base \
-			supervisor \
-	&& rm -rf /var/lib/apt/lists/*
+FROM gliderlabs/alpine:3.4
+RUN echo "@perl-5.20 http://dl-3.alpinelinux.org/alpine/v3.2/main">>/etc/apk/repositories \
+	&& apk add -U perl@edgea nginx
 
 COPY nph-proxy.cgi /var/www
 COPY default.conf ssl_config /etc/nginx/conf.d/
@@ -23,3 +15,5 @@ RUN ./nph-proxy.cgi init \
         && cpan FCGI::ProcManager
 
 CMD ["/usr/bin/supervisord"]
+	
+
