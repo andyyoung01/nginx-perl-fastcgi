@@ -4,8 +4,8 @@ RUN apk add -U --virtual build-dependencies build-base gcc abuild binutils binut
 #        && apk add --virtual cmake-pkgs cmake cmake-doc extra-cmake-modules extra-cmake-modules-doc \
 #        && apk add --virtual ccache-pkgs ccache ccache-doc
 
-RUN echo "@perl-5.20 http://dl-3.alpinelinux.org/alpine/v3.2/main">>/etc/apk/repositories \
-	&& apk add -U perl@perl-5.20 nginx
+#RUN echo "@perl-5.20 http://dl-3.alpinelinux.org/alpine/v3.2/main">>/etc/apk/repositories \
+RUN apk add -U perl nginx
 
 COPY nph-proxy.cgi /var/www
 COPY default.conf ssl_config /etc/nginx/conf.d/
